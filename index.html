@@ -195,7 +195,7 @@
             font-weight: 600;
         }
 
-        /* --- Infinite Scroll Clients (ATUALIZADO PARA IMAGENS) --- */
+        /* --- Infinite Scroll Clients --- */
         .clients {
             padding: 80px 0;
             text-align: center;
@@ -229,8 +229,7 @@
 
         .track {
             display: flex;
-            /* Ajuste o calculo se tiver mais ou menos logos. Ex: 200px * total de slides (duplicados inclusos) */
-            width: calc(200px * 14); 
+            width: calc(200px * 14);
             animation: scroll 35s linear infinite;
         }
 
@@ -244,37 +243,36 @@
 
         /* --- ESTILO DOS LOGOS ATUALIZADO (SEM QUADRADOS, MAIORES) --- */
         .client-box {
-            /* Removido o background e borda */
-            background: transparent;
-            border: none;
+            /* Removi background e borda */
             width: 100%;
-            height: 120px; /* Altura aumentada para a logo ficar maior */
+            height: 120px; /* Aumentei de 80px para 120px para ficar maior */
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0; /* Removido padding para aproveitar o espaço */
+            padding: 0; /* Removi padding para aproveitar espaço */
             transition: 0.3s;
         }
 
         .client-box img {
             max-width: 100%;
             max-height: 100%;
-            object-fit: contain; /* Garante que a logo não distorça */
-            filter: grayscale(100%) opacity(0.7); /* P&B inicial */
+            object-fit: contain;
+            filter: grayscale(100%) opacity(0.7); /* Opacidade para não brigar com o fundo */
             transition: 0.4s ease;
         }
 
+        /* Ao passar o mouse, apenas aumenta e colore, sem fundo */
         .client-box:hover {
-            transform: scale(1.1); /* Apenas aumenta um pouco, sem mover pra cima */
+            transform: scale(1.1);
         }
 
         .client-box:hover img {
-            filter: grayscale(0%) opacity(1); /* Colorido ao passar o mouse */
+            filter: grayscale(0%) opacity(1);
         }
 
         @keyframes scroll {
             0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-200px * 7)); } /* Ajuste * 7 para o número de logos originais (metade do total) */
+            100% { transform: translateX(calc(-200px * 7)); }
         }
 
         /* --- Services --- */
@@ -486,22 +484,20 @@
     <section id="inicio" class="hero">
         <div class="container">
             <div class="hero-grid">
-                
                 <div class="hero-text">
                     <h1>Transformo caos em<br> <span class="text-gradient">Processos Seguros</span></h1>
                     <p>Olá, sou Gabriel Lucas. Atuo como <span class="typer-text" id="typewriter"></span></p>
                     <p style="margin-top: -30px; font-size: 1rem;">Especialista em orquestração de TI, unindo a robustez do GRC com a eficiência do GLPI para empresas que não podem parar.</p>
                     
                     <div style="margin-top: 30px;">
-                        <a href="https://wa.me/81988044719" class="btn btn-primary"><i class="fab fa-whatsapp"></i> Consultoria Gratuita</a>
+                        <a href="https://wa.me/seunumero" class="btn btn-primary"><i class="fab fa-whatsapp"></i> Consultoria Gratuita</a>
                         <a href="#servicos" class="btn btn-outline">Ver Projetos</a>
                     </div>
                 </div>
-
+                
                 <div class="hero-visual" style="text-align: center;">
                     <i class="fas fa-shield-halved" style="font-size: 15rem; background: -webkit-linear-gradient(var(--accent), var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; opacity: 0.8; filter: drop-shadow(0 0 30px rgba(6, 182, 212, 0.3));"></i>
                 </div>
-
             </div>
         </div>
     </section>
@@ -532,12 +528,12 @@
                 <div class="track">
                     <div class="slide">
                         <div class="client-box">
-                            <img src="/img/logo1.png" alt="Cliente 1">
+                            <img src="/mppe.png" alt="Cliente 1">
                         </div>
                     </div>
                     <div class="slide">
                         <div class="client-box">
-                            <img src="/img/logo2.png" alt="Cliente 2">
+                            <img src="/img/mppe.png" alt="Cliente 2">
                         </div>
                     </div>
                     <div class="slide">
@@ -573,7 +569,6 @@
                     <div class="slide"><div class="client-box"><img src="/img/logo5.png" alt="Cliente 5"></div></div>
                     <div class="slide"><div class="client-box"><img src="/img/logo6.png" alt="Cliente 6"></div></div>
                     <div class="slide"><div class="client-box"><img src="/img/logo7.png" alt="Cliente 7"></div></div>
-
                 </div>
             </div>
         </div>
@@ -704,7 +699,7 @@
         <div class="container cta-content">
             <h2>Pronto para otimizar sua TI?</h2>
             <p style="margin: 20px 0 40px; color: #cbd5e1; font-size: 1.1rem;">Vamos analisar seu cenário atual e desenhar a melhor arquitetura de processos e ferramentas.</p>
-            <a href="https://wa.me/81988044719" class="btn btn-primary" style="font-size: 1.2rem; padding: 15px 40px;">Agendar Diagnóstico</a>
+            <a href="https://wa.me/seunumero" class="btn btn-primary" style="font-size: 1.2rem; padding: 15px 40px;">Agendar Diagnóstico</a>
         </div>
     </section>
 
@@ -719,7 +714,7 @@
         </div>
     </footer>
 
-    <a href="https://wa.me/81988044719" class="whatsapp-float" target="_blank">
+    <a href="https://wa.me/seunumero" class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
