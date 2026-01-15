@@ -1,13 +1,777 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>portfolio</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gabriel Lucas | Soluções em GRC & GLPI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #3b82f6;       
+            --secondary: #8b5cf6;     
+            --accent: #06b6d4;        
+            --bg-dark: #0f172a;       
+            --bg-card: #1e293b;       
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* --- Utilitários --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, var(--accent), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.6);
+        }
+
+        .btn-outline {
+            border: 2px solid rgba(255,255,255,0.1);
+            color: white;
+            margin-left: 15px;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* --- Header --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 15px 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .nav-menu a {
+            color: var(--text-muted);
+            margin-left: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-menu a:hover { color: var(--accent); }
+
+        /* --- Hero Section --- */
+        .hero {
+            padding: 160px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 500px;
+            height: 500px;
+            background: var(--primary);
+            filter: blur(150px);
+            opacity: 0.2;
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .hero-text h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            max-width: 550px;
+        }
+
+        .typer-text {
+            color: var(--accent);
+            border-right: 2px solid var(--accent);
+            white-space: nowrap;
+            overflow: hidden;
+            animation: blink 0.7s step-end infinite;
+        }
+
+        /* --- Stats Section --- */
+        .stats-bar {
+            background: rgba(255,255,255,0.03);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 40px 0;
+            margin-top: 50px;
+        }
+
+        .stats-grid {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 5px;
+        }
+
+        .stat-item p {
+            color: var(--accent);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        /* --- Infinite Scroll Clients (ATUALIZADO PARA IMAGENS) --- */
+        .clients {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .clients h4 {
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 40px;
+            font-size: 0.9rem;
+        }
+
+        .marquee {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .marquee::before, .marquee::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 150px;
+            height: 100%;
+            z-index: 2;
+        }
+
+        .marquee::before { left: 0; background: linear-gradient(to right, var(--bg-dark), transparent); }
+        .marquee::after { right: 0; background: linear-gradient(to left, var(--bg-dark), transparent); }
+
+        .track {
+            display: flex;
+            /* Ajuste o calculo se tiver mais ou menos logos. Ex: 200px * total de slides (duplicados inclusos) */
+            width: calc(200px * 14); 
+            animation: scroll 35s linear infinite;
+        }
+
+        .slide {
+            width: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+        }
+
+        /* ESTILO DOS LOGOS ATUALIZADO */
+        .client-box {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.05);
+            width: 100%;
+            height: 80px; /* Altura fixa para alinhar */
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px; /* Espaçamento interno */
+            transition: 0.3s;
+        }
+
+        .client-box img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain; /* Garante que a logo não distorça */
+            filter: grayscale(100%) opacity(0.6); /* P&B inicial */
+            transition: 0.4s ease;
+        }
+
+        .client-box:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .client-box:hover img {
+            filter: grayscale(0%) opacity(1); /* Colorido ao passar o mouse */
+            transform: scale(1.1);
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-200px * 7)); } /* Ajuste * 7 para o número de logos originais (metade do total) */
+        }
+
+        /* --- Services --- */
+        .services {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.4s;
+            position: relative;
+            overflow: hidden;
+            opacity: 0; 
+            transform: translateY(30px);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transition: 0.4s;
+            transform-origin: left;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+        }
+
+        .card h3 { margin-bottom: 15px; font-size: 1.4rem; }
+        .card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; line-height: 1.6; }
+
+        .feature-list {
+            margin-top: 25px;
+        }
+
+        .feature-list li {
+            list-style: none;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .feature-list li:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .feature-list li i {
+            color: var(--accent);
+            margin-right: 12px;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            min-width: 20px;
+        }
+
+        .list-content {
+            font-size: 0.95rem;
+            color: #cbd5e1;
+            line-height: 1.5;
+        }
+
+        .highlight {
+            color: white;
+            font-weight: 700;
+            margin-right: 5px;
+        }
+
+        /* --- CTA Section --- */
+        .cta-section {
+            padding: 100px 0;
+            text-align: center;
+            background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: #020617;
+            padding: 60px 0 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .socials {
+            margin-bottom: 30px;
+        }
+
+        .social-btn {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.05);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: 0.3s;
+        }
+
+        .social-btn:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            z-index: 2000;
+            transition: 0.3s;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes blink { 50% { border-color: transparent; } }
+
+        @media (max-width: 768px) {
+            .hero-grid { grid-template-columns: 1fr; text-align: center; }
+            .hero-text h1 { font-size: 2.8rem; }
+            .nav-menu { display: none; }
+            .hero-text p { margin: 0 auto 30px; }
+            .stats-grid { flex-direction: column; gap: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">GL<span style="color:var(--accent)">.Tech</span></div>
+                <div class="nav-menu">
+                    <a href="#inicio">Início</a>
+                    <a href="#servicos">Serviços</a>
+                    <a href="#clientes">Clientes</a>
+                    <a href="#contato" class="btn btn-primary" style="margin-left: 20px; padding: 8px 20px;">Fale Comigo</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section id="inicio" class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-text">
+                    <h1>Transformo caos em<br> <span class="text-gradient">Processos Seguros</span></h1>
+                    <p>Olá, sou Gabriel Lucas. Atuo como <span class="typer-text" id="typewriter"></span></p>
+                    <p style="margin-top: -30px; font-size: 1rem;">Especialista em orquestração de TI, unindo a robustez do GRC com a eficiência do GLPI para empresas que não podem parar.</p>
+                    
+                    <div style="margin-top: 30px;">
+                        <a href="https://wa.me/seunumero" class="btn btn-primary"><i class="fab fa-whatsapp"></i> Consultoria Gratuita</a>
+                        <a href="#servicos" class="btn btn-outline">Ver Projetos</a>
+                    </div>
+                </div>
+                <div class="hero-visual" style="text-align: center;">
+                    <i class="fas fa-shield-halved" style="font-size: 15rem; background: -webkit-linear-gradient(var(--accent), var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; opacity: 0.8; filter: drop-shadow(0 0 30px rgba(6, 182, 212, 0.3));"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="stats-bar">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>+10</h3>
+                    <p>Implantações GLPI</p>
+                </div>
+                <div class="stat-item">
+                    <h3>100%</h3>
+                    <p>Compliance Auditável</p>
+                </div>
+                <div class="stat-item">
+                    <h3>+5k</h3>
+                    <p>Chamados Otimizados/Mês</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="clientes" class="clients">
+        <div class="container">
+            <h4>Empresas que confiam na minha gestão</h4>
+            <div class="marquee">
+                <div class="track">
+                    <div class="slide">
+                        <div class="client-box">
+                            <img src="img/logo1.png" alt="Cliente 1">
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="client-box">
+                            <img src="img/logo2.png" alt="Cliente 2">
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="client-box">
+                            <img src="img/logo3.png" alt="Cliente 3">
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="client-box">
+                            <img src="img/logo4.png" alt="Cliente 4">
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="client-box">
+                            <img src="img/logo5.png" alt="Cliente 5">
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="client-box">
+                            <img src="img/logo6.png" alt="Cliente 6">
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="client-box">
+                            <img src="img/logo7.png" alt="Cliente 7">
+                        </div>
+                    </div>
+
+                    <div class="slide"><div class="client-box"><img src="img/logo1.png" alt="Cliente 1"></div></div>
+                    <div class="slide"><div class="client-box"><img src="img/logo2.png" alt="Cliente 2"></div></div>
+                    <div class="slide"><div class="client-box"><img src="img/logo3.png" alt="Cliente 3"></div></div>
+                    <div class="slide"><div class="client-box"><img src="img/logo4.png" alt="Cliente 4"></div></div>
+                    <div class="slide"><div class="client-box"><img src="img/logo5.png" alt="Cliente 5"></div></div>
+                    <div class="slide"><div class="client-box"><img src="img/logo6.png" alt="Cliente 6"></div></div>
+                    <div class="slide"><div class="client-box"><img src="img/logo7.png" alt="Cliente 7"></div></div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicos" class="services">
+        <div class="container">
+            <div class="section-header">
+                <h4 style="color:var(--accent); text-transform: uppercase; letter-spacing: 2px;">O que eu entrego</h4>
+                <h2>Excelência Operacional & Conformidade</h2>
+            </div>
+
+            <div class="cards-grid">
+                
+                <div class="card fade-in">
+                    <div class="icon-box"><i class="fas fa-tools"></i></div>
+                    <h3>Engenharia GLPI</h3>
+                    <p>Domínio total da ferramenta para transformá-la em uma suíte robusta de atendimento.</p>
+                    <ul class="feature-list">
+                        <li>
+                            <i class="fas fa-check"></i> 
+                            <div class="list-content">
+                                <span class="highlight">SLA & OLA:</span> Gestão complexa de níveis de serviço e escalonamentos.
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i> 
+                            <div class="list-content">
+                                <span class="highlight">FormCreator:</span> Formulários dinâmicos com validação e lógica condicional.
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i> 
+                            <div class="list-content">
+                                <span class="highlight">Personalização:</span> UI/UX, CSS customizado e branding da empresa.
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i> 
+                            <div class="list-content">
+                                <span class="highlight">Automação:</span> Regras de negócio, dicionários e ações automáticas.
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i> 
+                            <div class="list-content">
+                                <span class="highlight">Inventário:</span> FusionInventory e GLPI Agent.
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card fade-in" style="transition-delay: 100ms;">
+                    <div class="icon-box"><i class="fas fa-sitemap"></i></div>
+                    <h3>Processos ITIL & Governança</h3>
+                    <p>Implementação das melhores práticas de mercado para organizar o caos operacional.</p>
+                    <ul class="feature-list">
+                        <li>
+                            <i class="fas fa-check"></i> 
+                            <div class="list-content">
+                                <span class="highlight">Incidentes & Requisições:</span> Fluxos distintos para restaurar vs. entregar.
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i> 
+                            <div class="list-content">
+                                <span class="highlight">Gestão de Acessos (IAM):</span> Ciclo de vida de identidade (Admissão, Mudança, Desligamento).
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i> 
+                            <div class="list-content">
+                                <span class="highlight">Gestão de Mudanças:</span> Aprovações, CAB e análise de impacto.
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i> 
+                            <div class="list-content">
+                                <span class="highlight">Gestão de Problemas:</span> Análise de causa raiz (RCA) e base de erros conhecidos.
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card fade-in" style="transition-delay: 200ms;">
+                    <div class="icon-box"><i class="fas fa-shield-virus"></i></div>
+                    <h3>GRC & Inteligência de Dados</h3>
+                    <p>Segurança jurídica, gestão de riscos e visão analítica para tomada de decisão.</p>
+                    <ul class="feature-list">
+                        <li>
+                            <i class="fas fa-check"></i> 
+                            <div class="list-content">
+                                <span class="highlight">Matriz de Riscos:</span> Identificação e mitigação de vulnerabilidades.
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i> 
+                            <div class="list-content">
+                                <span class="highlight">Compliance LGPD:</span> Mapeamento de dados e gestão de privacidade.
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i> 
+                            <div class="list-content">
+                                <span class="highlight">Auditoria:</span> Rastrealidade total de logs e ações no sistema.
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i> 
+                            <div class="list-content">
+                                <span class="highlight">Power BI & Python:</span> Analytics avançado e automações de dados para monitorar a saúde da TI sem planilhas manuais.
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i> 
+                            <div class="list-content">
+                                <span class="highlight">PSI:</span> Criação de Políticas de Segurança da Informação.
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contato" class="cta-section">
+        <div class="container cta-content">
+            <h2>Pronto para otimizar sua TI?</h2>
+            <p style="margin: 20px 0 40px; color: #cbd5e1; font-size: 1.1rem;">Vamos analisar seu cenário atual e desenhar a melhor arquitetura de processos e ferramentas.</p>
+            <a href="https://wa.me/seunumero" class="btn btn-primary" style="font-size: 1.2rem; padding: 15px 40px;">Agendar Diagnóstico</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="socials">
+                <a href="#" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="social-btn"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-btn"><i class="fas fa-envelope"></i></a>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">&copy; 2026 Gabriel Lucas. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/seunumero" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // 1. Efeito de Digitação
+        const textElement = document.getElementById('typewriter');
+        const phrases = ['Especialista GLPI', 'Consultor GRC', 'Analista de Dados'];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function type() {
+            const currentPhrase = phrases[phraseIndex];
+            
+            if (isDeleting) {
+                textElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                textElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                isDeleting = true;
+                setTimeout(type, 2000); 
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                setTimeout(type, 500);
+            } else {
+                setTimeout(type, isDeleting ? 50 : 100);
+            }
+        }
+        document.addEventListener('DOMContentLoaded', type);
+
+        // 2. Animação de aparecer
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
 </html>
