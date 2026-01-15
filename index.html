@@ -9,11 +9,11 @@
     
     <style>
         :root {
-            --primary: #3b82f6;       
-            --secondary: #8b5cf6;     
+            --primary: #3b82f6;        
+            --secondary: #8b5cf6;      
             --accent: #06b6d4;        
-            --bg-dark: #0f172a;       
-            --bg-card: #1e293b;       
+            --bg-dark: #0f172a;        
+            --bg-card: #1e293b;        
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -185,6 +185,9 @@
             font-size: 2.5rem;
             color: white;
             margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .stat-item p {
@@ -241,7 +244,6 @@
             padding: 0 20px;
         }
 
-        /* --- ESTILO DOS LOGOS ATUALIZADO --- */
         .client-box {
             width: 100%;
             height: 120px; 
@@ -446,10 +448,14 @@
             box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
             z-index: 2000;
             transition: 0.3s;
+            /* Fix para o traço */
+            text-decoration: none !important;
+            border: none !important;
         }
 
         .whatsapp-float:hover {
             transform: scale(1.1);
+            text-decoration: none !important;
         }
 
         @keyframes blink { 50% { border-color: transparent; } }
@@ -488,7 +494,7 @@
                     <p style="margin-top: -30px; font-size: 1rem;">Especialista em orquestração de TI, unindo a robustez do GRC com a eficiência do GLPI para empresas que não podem parar.</p>
                     
                     <div style="margin-top: 30px;">
-                        <a href="https://wa.me/seunumero" class="btn btn-primary"><i class="fab fa-whatsapp"></i> Consultoria Gratuita</a>
+                        <a href="https://wa.me/5581988044719" class="btn btn-primary"><i class="fab fa-whatsapp"></i> Consultoria Gratuita</a>
                         <a href="#servicos" class="btn btn-outline">Ver Projetos</a>
                     </div>
                 </div>
@@ -504,15 +510,15 @@
         <div class="container">
             <div class="stats-grid">
                 <div class="stat-item">
-                    <h3>+10</h3>
+                    <h3>+<span class="counter" data-target="10">0</span></h3>
                     <p>Implantações GLPI</p>
                 </div>
                 <div class="stat-item">
-                    <h3>100%</h3>
+                    <h3><span class="counter" data-target="100">0</span>%</h3>
                     <p>Compliance Auditável</p>
                 </div>
                 <div class="stat-item">
-                    <h3>+5k</h3>
+                    <h3>+<span class="counter" data-target="5">0</span>k</h3>
                     <p>Chamados Otimizados/Mês</p>
                 </div>
             </div>
@@ -669,7 +675,7 @@
         <div class="container cta-content">
             <h2>Pronto para otimizar sua TI?</h2>
             <p style="margin: 20px 0 40px; color: #cbd5e1; font-size: 1.1rem;">Vamos analisar seu cenário atual e desenhar a melhor arquitetura de processos e ferramentas.</p>
-            <a href="https://wa.me/seunumero" class="btn btn-primary" style="font-size: 1.2rem; padding: 15px 40px;">Agendar Diagnóstico</a>
+            <a href="https://wa.me/5581988044719" class="btn btn-primary" style="font-size: 1.2rem; padding: 15px 40px;">Agendar Diagnóstico</a>
         </div>
     </section>
 
@@ -684,7 +690,7 @@
         </div>
     </footer>
 
-    <a href="https://wa.me/seunumero" class="whatsapp-float" target="_blank">
+    <a href="https://wa.me/5581988044719" class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
@@ -720,7 +726,7 @@
         }
         document.addEventListener('DOMContentLoaded', type);
 
-        // 2. Animação de aparecer
+        // 2. Animação de aparecer Cards
         const observerOptions = {
             threshold: 0.1
         };
@@ -737,6 +743,41 @@
         document.querySelectorAll('.fade-in').forEach(el => {
             observer.observe(el);
         });
+
+        // 3. NOVA Animação dos Números (Contador Suave)
+        const statsSection = document.querySelector('.stats-bar');
+        const counters = document.querySelectorAll('.counter');
+        let started = false; // Garante que roda apenas uma vez
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            // Quando a seção de stats aparecer na tela
+            if (entries[0].isIntersecting && !started) {
+                counters.forEach(counter => {
+                    const target = +counter.getAttribute('data-target'); // Pega o número alvo
+                    const duration = 2000; // Duração de 2 segundos
+                    const increment = target / (duration / 16); // 60 FPS aprox
+
+                    let current = 0;
+
+                    const updateCounter = () => {
+                        current += increment;
+                        if (current < target) {
+                            counter.innerText = Math.ceil(current);
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            counter.innerText = target;
+                        }
+                    };
+
+                    updateCounter();
+                });
+                started = true;
+            }
+        });
+
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
     </script>
 </body>
 </html>
