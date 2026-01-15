@@ -195,7 +195,7 @@
             font-weight: 600;
         }
 
-        /* --- Infinite Scroll Clients (ATUALIZADO PARA IMAGENS) --- */
+        /* --- Infinite Scroll Clients --- */
         .clients {
             padding: 80px 0;
             text-align: center;
@@ -229,8 +229,7 @@
 
         .track {
             display: flex;
-            /* Ajuste o calculo se tiver mais ou menos logos. Ex: 200px * total de slides (duplicados inclusos) */
-            width: calc(200px * 14); 
+            width: calc(200px * 14);
             animation: scroll 35s linear infinite;
         }
 
@@ -242,25 +241,26 @@
             padding: 0 20px;
         }
 
-        /* ESTILO DOS LOGOS ATUALIZADO */
+        /* ESTILO DOS LOGOS (AJUSTADO PARA IMAGENS) */
         .client-box {
             background: rgba(255,255,255,0.03);
             border: 1px solid rgba(255,255,255,0.05);
             width: 100%;
-            height: 80px; /* Altura fixa para alinhar */
+            height: 80px;
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 15px; /* Espaçamento interno */
+            padding: 15px; /* Espaço interno para a logo */
             transition: 0.3s;
         }
 
+        /* CSS ESPECÍFICO PARA AS IMAGENS DAS LOGOS */
         .client-box img {
             max-width: 100%;
             max-height: 100%;
-            object-fit: contain; /* Garante que a logo não distorça */
-            filter: grayscale(100%) opacity(0.6); /* P&B inicial */
+            object-fit: contain;
+            filter: grayscale(100%) opacity(0.6); /* Preto e branco inicial */
             transition: 0.4s ease;
         }
 
@@ -270,14 +270,15 @@
             transform: translateY(-2px);
         }
 
+        /* EFEITO DE COR AO PASSAR O MOUSE */
         .client-box:hover img {
-            filter: grayscale(0%) opacity(1); /* Colorido ao passar o mouse */
+            filter: grayscale(0%) opacity(1);
             transform: scale(1.1);
         }
 
         @keyframes scroll {
             0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-200px * 7)); } /* Ajuste * 7 para o número de logos originais (metade do total) */
+            100% { transform: translateX(calc(-200px * 7)); }
         }
 
         /* --- Services --- */
@@ -489,22 +490,20 @@
     <section id="inicio" class="hero">
         <div class="container">
             <div class="hero-grid">
-                
                 <div class="hero-text">
                     <h1>Transformo caos em<br> <span class="text-gradient">Processos Seguros</span></h1>
                     <p>Olá, sou Gabriel Lucas. Atuo como <span class="typer-text" id="typewriter"></span></p>
                     <p style="margin-top: -30px; font-size: 1rem;">Especialista em orquestração de TI, unindo a robustez do GRC com a eficiência do GLPI para empresas que não podem parar.</p>
                     
                     <div style="margin-top: 30px;">
-                        <a href="https://wa.me/81988044719" class="btn btn-primary"><i class="fab fa-whatsapp"></i> Consultoria Gratuita</a>
+                        <a href="https://wa.me/seunumero" class="btn btn-primary"><i class="fab fa-whatsapp"></i> Consultoria Gratuita</a>
                         <a href="#servicos" class="btn btn-outline">Ver Projetos</a>
                     </div>
                 </div>
-
+                
                 <div class="hero-visual" style="text-align: center;">
-                    <img src="/mppe.png" alt="Imagem de Destaque" style="max-width: 100%; height: auto; border-radius: 20px; box-shadow: 0 0 30px rgba(6, 182, 212, 0.3);">
+                    <i class="fas fa-shield-halved" style="font-size: 15rem; background: -webkit-linear-gradient(var(--accent), var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; opacity: 0.8; filter: drop-shadow(0 0 30px rgba(6, 182, 212, 0.3));"></i>
                 </div>
-
             </div>
         </div>
     </section>
@@ -533,51 +532,49 @@
             <h4>Empresas que confiam na minha gestão</h4>
             <div class="marquee">
                 <div class="track">
-                    
                     <div class="slide">
                         <div class="client-box">
-                            <img src="/mppe.png" alt="Cliente MPPE">
+                            <img src="/mppe.png" alt="Cliente 1">
                         </div>
                     </div>
                     <div class="slide">
                         <div class="client-box">
-                            <img src="/mppe.png" alt="Cliente MPPE">
+                            <img src="/img/mppe.png" alt="Cliente 2">
                         </div>
                     </div>
                     <div class="slide">
                         <div class="client-box">
-                            <img src="/mppe.png" alt="Cliente MPPE">
+                            <img src="/img/logo3.png" alt="Cliente 3">
                         </div>
                     </div>
                     <div class="slide">
                         <div class="client-box">
-                            <img src="/mppe.png" alt="Cliente MPPE">
+                            <img src="/img/logo4.png" alt="Cliente 4">
                         </div>
                     </div>
                     <div class="slide">
                         <div class="client-box">
-                            <img src="/mppe.png" alt="Cliente MPPE">
+                            <img src="/img/logo5.png" alt="Cliente 5">
                         </div>
                     </div>
                     <div class="slide">
                         <div class="client-box">
-                            <img src="/mppe.png" alt="Cliente MPPE">
+                            <img src="/img/logo6.png" alt="Cliente 6">
                         </div>
                     </div>
                     <div class="slide">
                         <div class="client-box">
-                            <img src="/mppe.png" alt="Cliente MPPE">
+                            <img src="/img/logo7.png" alt="Cliente 7">
                         </div>
                     </div>
 
-                    <div class="slide"><div class="client-box"><img src="/mppe.png" alt="Cliente MPPE"></div></div>
-                    <div class="slide"><div class="client-box"><img src="/mppe.png" alt="Cliente MPPE"></div></div>
-                    <div class="slide"><div class="client-box"><img src="/mppe.png" alt="Cliente MPPE"></div></div>
-                    <div class="slide"><div class="client-box"><img src="/mppe.png" alt="Cliente MPPE"></div></div>
-                    <div class="slide"><div class="client-box"><img src="/mppe.png" alt="Cliente MPPE"></div></div>
-                    <div class="slide"><div class="client-box"><img src="/mppe.png" alt="Cliente MPPE"></div></div>
-                    <div class="slide"><div class="client-box"><img src="/mppe.png" alt="Cliente MPPE"></div></div>
-
+                    <div class="slide"><div class="client-box"><img src="/img/logo1.png" alt="Cliente 1"></div></div>
+                    <div class="slide"><div class="client-box"><img src="/img/logo2.png" alt="Cliente 2"></div></div>
+                    <div class="slide"><div class="client-box"><img src="/img/logo3.png" alt="Cliente 3"></div></div>
+                    <div class="slide"><div class="client-box"><img src="/img/logo4.png" alt="Cliente 4"></div></div>
+                    <div class="slide"><div class="client-box"><img src="/img/logo5.png" alt="Cliente 5"></div></div>
+                    <div class="slide"><div class="client-box"><img src="/img/logo6.png" alt="Cliente 6"></div></div>
+                    <div class="slide"><div class="client-box"><img src="/img/logo7.png" alt="Cliente 7"></div></div>
                 </div>
             </div>
         </div>
@@ -708,7 +705,7 @@
         <div class="container cta-content">
             <h2>Pronto para otimizar sua TI?</h2>
             <p style="margin: 20px 0 40px; color: #cbd5e1; font-size: 1.1rem;">Vamos analisar seu cenário atual e desenhar a melhor arquitetura de processos e ferramentas.</p>
-            <a href="https://wa.me/81988044719" class="btn btn-primary" style="font-size: 1.2rem; padding: 15px 40px;">Agendar Diagnóstico</a>
+            <a href="https://wa.me/seunumero" class="btn btn-primary" style="font-size: 1.2rem; padding: 15px 40px;">Agendar Diagnóstico</a>
         </div>
     </section>
 
@@ -723,7 +720,7 @@
         </div>
     </footer>
 
-    <a href="https://wa.me/81988044719" class="whatsapp-float" target="_blank">
+    <a href="https://wa.me/seunumero" class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
