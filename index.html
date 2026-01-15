@@ -241,39 +241,33 @@
             padding: 0 20px;
         }
 
-        /* ESTILO DOS LOGOS (AJUSTADO PARA IMAGENS) */
+        /* --- ESTILO DOS LOGOS ATUALIZADO (SEM QUADRADOS, MAIORES) --- */
         .client-box {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.05);
+            /* Removi background e borda */
             width: 100%;
-            height: 80px;
-            border-radius: 8px;
+            height: 120px; /* Aumentei de 80px para 120px para ficar maior */
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 15px; /* Espaço interno para a logo */
+            padding: 0; /* Removi padding para aproveitar espaço */
             transition: 0.3s;
         }
 
-        /* CSS ESPECÍFICO PARA AS IMAGENS DAS LOGOS */
         .client-box img {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
-            filter: grayscale(100%) opacity(0.6); /* Preto e branco inicial */
+            filter: grayscale(100%) opacity(0.7); /* Opacidade para não brigar com o fundo */
             transition: 0.4s ease;
         }
 
+        /* Ao passar o mouse, apenas aumenta e colore, sem fundo */
         .client-box:hover {
-            background: rgba(255,255,255,0.08);
-            border-color: var(--primary);
-            transform: translateY(-2px);
+            transform: scale(1.1);
         }
 
-        /* EFEITO DE COR AO PASSAR O MOUSE */
         .client-box:hover img {
             filter: grayscale(0%) opacity(1);
-            transform: scale(1.1);
         }
 
         @keyframes scroll {
@@ -534,12 +528,12 @@
                 <div class="track">
                     <div class="slide">
                         <div class="client-box">
-                            <img src="/img/mppe.png" alt="Cliente 1">
+                            <img src="/mppe.png" alt="Cliente 1">
                         </div>
                     </div>
                     <div class="slide">
                         <div class="client-box">
-                            <img src="/mppe.png" alt="Cliente 2">
+                            <img src="/img/mppe.png" alt="Cliente 2">
                         </div>
                     </div>
                     <div class="slide">
